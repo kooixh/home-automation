@@ -5,7 +5,8 @@ module.exports = function(){
 
     return {
         getDeviceByIP: getDeviceByIP,
-        turnBulbOn:turnBulbOn
+        turnBulbOn:turnBulbOn,
+        turnBulbOff: turnBulbOff
     }
 
 }();
@@ -30,4 +31,9 @@ async function getDeviceByIP(host) {
 async function turnBulbOn(bulb) {
     await bulb.setPowerState(true);
     return {'message': bulb.alias+' switched on', status: 'success'};
+}
+
+async function turnBulbOff(bulb) {
+    await bulb.setPowerState(false);
+    return {'message': bulb.alias+' switched off', status: 'success'};
 }

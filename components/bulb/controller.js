@@ -9,7 +9,8 @@ let bulbSrv = require('./services');
 module.exports = function () {
 
     return {
-        turnBulbOnByIP: turnBulbOnByIP
+        turnBulbOnByIP: turnBulbOnByIP,
+        turnBulbOffByIP: turnBulbOffByIP
     }
 }();
 
@@ -23,7 +24,8 @@ module.exports = function () {
  * @param next
  */
 async function turnBulbOnByIP(req, res, next) {
-    if(!req.body || req.body.hasOwnProperty('host'))
+
+    if(!req.body || !req.body.hasOwnProperty('host'))
         return next(new Error('Body does not has host field.'));
 
     let hostAddress = req.body.host;
@@ -34,7 +36,27 @@ async function turnBulbOnByIP(req, res, next) {
     }catch (e) {
         next(e);
     }
-
 }
 
+/**
+ *
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @returns {Promise<*>}
+ */
+async function turnBulbOffByIP(req, res, next) {
+    if(!req.body || !req.body.hasOwnProperty('host'))
+        return next(new Error('Body does not has host field.'));
+
+    let hostAddress = req.body.host;
+    try{
+        let bulb = await bulbSrv.getDeviceByIP(hostAddress);
+        let response = await bulbSrv.turnBulbOff(bulb);
+        return res.status(200).json(response);
+    }catch (e) {
+        next(e);
+    }
+}
 

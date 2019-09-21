@@ -5,9 +5,9 @@ A Rest API with endpoints to perform operations on TP-Link smart home devices.
 
 ## Supported devices
 
-Bulb - HS100, HS103, HS105, HS107, HS110, HS200, HS220, HS300
+Plug - HS100, HS103, HS105, HS107, HS110, HS200, HS220, HS300
 
-Plug - LB100, LB110, LB120, LB130, LB200, LB230
+Bulb - LB100, LB110, LB120, LB130, LB200, LB230
 
 ## Requires
 
@@ -31,7 +31,7 @@ Response body:
 {
 	"devices": [
 		{
-			"name": "Living room",
+			"name": "Living room light",
 			"host": "12.11.0.100"
 		}
 	]
@@ -54,7 +54,7 @@ Request body:
 Response body:
 ```json
 {
-	"message": "Computer room light switched on",
+	"message": "Living room light switched on",
 	"status": "success"
 }
 ```
@@ -72,7 +72,7 @@ Request body:
 Response body:
 ```json
 {
-	"message": "Computer room light switched off",
+	"message": "Living room light switched off",
 	"status": "success"
 }
 ```

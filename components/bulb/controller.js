@@ -31,6 +31,8 @@ async function turnBulbOnByIP(req, res, next) {
     let hostAddress = req.body.host;
     try{
         let bulb = await bulbSrv.getDeviceByIP(hostAddress);
+        if (bulb === null)
+            return res.status(404).json({status: 'error', message:'Device not found for host', data: {}});
         let response = await bulbSrv.turnBulbOn(bulb);
         return res.status(200).json(response);
     }catch (e) {
@@ -53,6 +55,10 @@ async function turnBulbOffByIP(req, res, next) {
     let hostAddress = req.body.host;
     try{
         let bulb = await bulbSrv.getDeviceByIP(hostAddress);
+
+        if (bulb === null)
+            return res.status(404).json({status: 'error', message:'Device not found for host', data: {}});
+
         let response = await bulbSrv.turnBulbOff(bulb);
         return res.status(200).json(response);
     }catch (e) {

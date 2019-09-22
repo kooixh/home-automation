@@ -228,7 +228,7 @@ Response body:
 
 **POST /bulb/ip/brightness**
 
-Turn on bulb using the host address
+Set the brightness of a bulb using the host address
 
 Request body:
 ```json

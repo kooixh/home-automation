@@ -10,7 +10,8 @@ module.exports = function () {
 
     return {
         turnBulbOnByIP: turnBulbOnByIP,
-        turnBulbOffByIP: turnBulbOffByIP
+        turnBulbOffByIP: turnBulbOffByIP,
+        setBulbBrightness: setBulbBrightness
     }
 }();
 
@@ -66,3 +67,38 @@ async function turnBulbOffByIP(req, res, next) {
     }
 }
 
+/**
+ *
+ * Set the brightness of a bulb
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @returns {Promise<*>}
+ */
+async function setBulbBrightness(req, res, next) {
+
+    if(!req.body || !req.body.hasOwnProperty('host')) return next(new Error('Body does not have host field.'));
+    if(!req.body || !req.body.hasOwnProperty('brightness')) return next(new Error('Body does not have brightness field.'));
+
+    if(isNaN(req.body.brightness) || req.body.brightness === '') return next(new Error('Brightness value is not a number'));
+    let brightness = parseInt(req.body.brightness);
+
+    if(brightness < 0 || brightness > 100 ) return next(new Error('Invalid brightness level'));
+
+    try {
+        let bulb = await bulbSrv.getDeviceByIP(req.body.host);
+
+        if(bulb === null) return res.status(400).json({status: 'error', message: 'Device not found for host'});
+
+        let response = await bulbSrv.setBulbBrightness(bulb, brightness);
+        return res.status(200).json(response);
+
+
+    } catch (e) {
+        next(e);
+    }
+
+
+
+}

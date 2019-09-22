@@ -6,7 +6,8 @@ module.exports = function(){
     return {
         getDeviceByIP: getDeviceByIP,
         turnBulbOn:turnBulbOn,
-        turnBulbOff: turnBulbOff
+        turnBulbOff: turnBulbOff,
+        setBulbBrightness: setBulbBrightness
     }
 
 }();
@@ -51,4 +52,17 @@ async function turnBulbOn(bulb) {
 async function turnBulbOff(bulb) {
     await bulb.setPowerState(false);
     return {'message': bulb.alias+' switched off', status: 'success'};
+}
+
+/**
+ *
+ *
+ *
+ * @param bulb
+ * @param brightness
+ * @returns {Promise<void>}
+ */
+async function setBulbBrightness(bulb, brightness) {
+    await bulb.lighting.setLightState({brightness: brightness});
+    return {'message': bulb.alias+' brightness set to '+brightness, status: 'success'};
 }

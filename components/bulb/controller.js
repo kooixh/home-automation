@@ -4,7 +4,8 @@
  * Created by Xiu Hong 21/9/2019
  *
  */
-let colourUtils = require('../../utils/colout.utils');
+let colourUtils = require('../../utils/colour.utils');
+let colourConvert = require('color-convert');
 let bulbSrv = require('./services');
 
 module.exports = function () {
@@ -12,7 +13,8 @@ module.exports = function () {
     return {
         turnBulbOnByIP: turnBulbOnByIP,
         turnBulbOffByIP: turnBulbOffByIP,
-        setBulbBrightness: setBulbBrightness
+        setBulbBrightness: setBulbBrightness,
+        setBulbColour: setBulbColour
     }
 }();
 
@@ -115,21 +117,16 @@ async function setBulbBrightness(req, res, next) {
 async function setBulbColour(req, res, next) {
 
     if(!req.body || !req.body.hasOwnProperty('host')) return next(new Error('Body does not have host field.'));
-    if(!req.body || !req.body.hasOwnProperty('colour')) return next(new Error('Body does not have colour field.'));
+    if(!req.body || !req.body.hasOwnProperty('color')) return next(new Error('Body does not have colour field.'));
 
-    if(!colourUtils.isHEXColour(req.body.colour)) return next(new Error('Colour has to be in hex'));
-    let hex = parseInt(req.body.brightness);
-
-    if(brightness < 0 || brightness > 100 ) return next(new Error('Invalid brightness level'));
+    if(!colourUtils.isHEXColour(req.body.color)) return next(new Error('Colour has to be in hex value. e.g: 2f458a'));
+    let hsv = colourConvert.hex.hsv(req.body.color);
 
     try {
         let bulb = await bulbSrv.getDeviceByIP(req.body.host);
-
         if(bulb === null) return res.status(400).json({status: 'error', message: 'Device not found for host'});
-
-        let response = await bulbSrv.setBulbBrightness(bulb, brightness);
+        let response = await bulbSrv.setBulbColour(bulb, hsv);
         return res.status(200).json(response);
-
 
     } catch (e) {
         next(e);

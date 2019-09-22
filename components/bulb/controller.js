@@ -14,7 +14,8 @@ module.exports = function () {
         turnBulbOnByIP: turnBulbOnByIP,
         turnBulbOffByIP: turnBulbOffByIP,
         setBulbBrightness: setBulbBrightness,
-        setBulbColour: setBulbColour
+        setBulbColour: setBulbColour,
+        setColourTemperature: setColourTemperature
     }
 }();
 
@@ -125,11 +126,51 @@ async function setBulbColour(req, res, next) {
     try {
         let bulb = await bulbSrv.getDeviceByIP(req.body.host);
         if(bulb === null) return res.status(400).json({status: 'error', message: 'Device not found for host'});
+
+        if(!bulb.supportsColor) return res.status(400).json({status: 'error', message: 'Your bulb does not support color'});
+
         let response = await bulbSrv.setBulbColour(bulb, hsv);
         return res.status(200).json(response);
 
     } catch (e) {
         next(e);
     }
+
+}
+
+/**
+ *
+ *
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @returns {Promise<void>}
+ */
+async function setColourTemperature(req, res, next) {
+    if(!req.body || !req.body.hasOwnProperty('host')) return next(new Error('Body does not have host field.'));
+    if(!req.body || !req.body.hasOwnProperty('temperature')) return next(new Error('Body does not have temperature field.'));
+
+
+    if(isNaN(req.body.temperature) || req.body.temperature === '') return next(new Error('Brightness value is not a number'));
+
+    let temperature = parseInt(req.body.temperature);
+    try {
+        let bulb = await bulbSrv.getDeviceByIP(req.body.host);
+        if (bulb === null) return res.status(400).json({status: 'error', message: 'Device not found for host'});
+
+        if (!bulb.supportsColorTemperature) return res.status(400).json({status: 'error', message: 'Your bulb does not support color'});
+
+        let range = bulb.getColorTemperatureRange;
+
+        if((temperature < range.min || temperature > range.max) && temperature !== 0 ) return res.status(400).json({status: 'error', message: 'Color temperature value out of range'});
+
+        let response = await bulbSrv.setBulbTemperature(bulb, temperature);
+        return res.status(200).json(response);
+
+    } catch (e) {
+        next(e);
+    }
+
 
 }

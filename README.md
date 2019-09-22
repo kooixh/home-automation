@@ -267,3 +267,24 @@ Response body:
 	"status": "success"
 }
 ```
+
+**POST /bulb/ip/colorTemperature**
+
+Set the color temperature of a bulb using the host address
+
+Request body:
+```json
+{
+  "host": "12.11.0.100",
+  "temperature": "4000"
+}
+```
+
+
+Response body:
+```json
+{
+	"message": "Living room light colour temperature set to 4000",
+	"status": "success"
+}
+```

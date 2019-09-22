@@ -8,7 +8,8 @@ module.exports = function(){
         turnBulbOn:turnBulbOn,
         turnBulbOff: turnBulbOff,
         setBulbBrightness: setBulbBrightness,
-        setBulbColour: setBulbColour
+        setBulbColour: setBulbColour,
+        setBulbTemperature: setBulbTemperature
     }
 
 }();
@@ -87,4 +88,19 @@ async function setBulbColour(bulb, hsv) {
     let temperature = (hue === 0 && saturation === 0) ? 4000 : 0;
     await bulb.lighting.setLightState({hue: hue, saturation: saturation,brightness: value, color_temp:temperature});
     return {'message': bulb.alias+' colour set to HSV '+hue+' '+saturation+' '+value, status: 'success'};
+}
+
+
+/**
+ *
+ *
+ *
+ * @param bulb
+ * @param brightness
+ * @returns {Promise<void>}
+ */
+async function setBulbTemperature(bulb, temperature) {
+
+    await bulb.lighting.setLightState({color_temp:temperature});
+    return {'message': bulb.alias+' colour temperature set to '+ temperature, status: 'success'};
 }

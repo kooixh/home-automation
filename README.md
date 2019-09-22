@@ -15,17 +15,17 @@ Bulb - LB100, LB110, LB120, LB130, LB200, LB230
 * npm
 * Express
 
-## Dependency 
+## Dependency
 
 [tplink-smarthome-api](https://github.com/plasticrake/tplink-smarthome-api)
 
 
-## Endpoints 
+## Endpoints
 
 ### Devices
 **GET /devices/list**
 
-List all devices 
+List all devices
 
 Response body:
 ```json
@@ -41,7 +41,7 @@ Response body:
 
 **GET /devices/ip/:host**
 
-Get a device using host address 
+Get a device using host address
 
 Response body:
 ```json
@@ -183,12 +183,12 @@ Response body:
 ```
 
 
-### Bulbs 
+### Bulbs
 
 
 **POST /bulb/ip/turnOn**
 
-Turn on bulb using the host address 
+Turn on bulb using the host address
 
 Request body:
 ```json
@@ -208,7 +208,7 @@ Response body:
 
 **POST /bulb/ip/turnOff**
 
-Turn on bulb using the host address 
+Turn on bulb using the host address
 
 Request body:
 ```json
@@ -222,6 +222,27 @@ Response body:
 ```json
 {
 	"message": "Living room light switched off",
+	"status": "success"
+}
+```
+
+**POST /bulb/ip/brightness**
+
+Turn on bulb using the host address
+
+Request body:
+```json
+{
+  "host": "12.11.0.100",
+  "brightness": "20"
+}
+```
+
+
+Response body:
+```json
+{
+	"message": "Living room light brightness set to 20",
 	"status": "success"
 }
 ```

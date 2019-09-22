@@ -64,5 +64,5 @@ async function turnBulbOff(bulb) {
  */
 async function setBulbBrightness(bulb, brightness) {
     await bulb.lighting.setLightState({brightness: brightness});
-    return {'message': bulb.alias+'brightness set to '+brightness, status: 'success'};
+    return {'message': bulb.alias+' brightness set to '+brightness, status: 'success'};
 }

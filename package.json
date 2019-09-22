@@ -16,6 +16,7 @@
     "tplink-smarthome-api": "^1.2.0"
   },
   "dependencies": {
+    "color-convert": "^2.0.1",
     "uglify-js": "^3.6.0"
   }
 }

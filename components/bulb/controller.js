@@ -81,7 +81,7 @@ async function setBulbBrightness(req, res, next) {
     if(!req.body || !req.body.hasOwnProperty('host')) return next(new Error('Body does not have host field.'));
     if(!req.body || !req.body.hasOwnProperty('brightness')) return next(new Error('Body does not have brightness field.'));
 
-    if(isNaN(req.body.brightness)) return next(new Error('Brightness value is not a number'));
+    if(isNaN(req.body.brightness) || req.body.brightness === '') return next(new Error('Brightness value is not a number'));
     let brightness = parseInt(req.body.brightness);
 
     if(brightness < 0 || brightness > 100 ) return next(new Error('Invalid brightness level'));
@@ -102,4 +102,3 @@ async function setBulbBrightness(req, res, next) {
 
 
 }
-

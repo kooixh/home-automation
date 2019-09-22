@@ -185,8 +185,11 @@ Response body:
 
 ### Bulbs 
 
+
 **POST /bulb/ip/turnOn**
+
 Turn on bulb using the host address 
+
 Request body:
 ```json
 {
@@ -204,7 +207,9 @@ Response body:
 ```
 
 **POST /bulb/ip/turnOff**
+
 Turn on bulb using the host address 
+
 Request body:
 ```json
 {

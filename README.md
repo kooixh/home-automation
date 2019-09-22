@@ -11,9 +11,9 @@ Bulb - LB100, LB110, LB120, LB130, LB200, LB230
 
 ## Requires
 
-* NodeJS
-* npm
-* Express
+* [NodeJS](https://nodejs.org/en/)
+* [npm](https://www.npmjs.com/)
+* [ExpressJS](https://expressjs.com/)
 
 ## Dependency
 
@@ -208,7 +208,7 @@ Response body:
 
 **POST /bulb/ip/turnOff**
 
-Turn on bulb using the host address
+Turn off bulb using the host address
 
 Request body:
 ```json
@@ -243,6 +243,27 @@ Response body:
 ```json
 {
 	"message": "Living room light brightness set to 20",
+	"status": "success"
+}
+```
+
+**POST /bulb/ip/color**
+
+Set the color of a bulb by hex value using the host address
+
+Request body:
+```json
+{
+  "host": "12.11.0.100",
+  "color": "2BFF24"
+}
+```
+
+
+Response body:
+```json
+{
+	"message": "Living room light colour set to HSV 118 86 100",
 	"status": "success"
 }
 ```

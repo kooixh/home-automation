@@ -49,134 +49,20 @@ Response body:
     "status": "success",
     "message": "device found",
     "data": {
-        "_events": {},
-        "_eventsCount": 0,
-        "client": {
-            "_events": {},
-            "_eventsCount": 0,
-            "defaultSendOptions": {
-                "timeout": 10000,
-                "transport": "tcp"
-            },
-            "log": {
-                "levels": {
-                    "TRACE": 0,
-                    "DEBUG": 1,
-                    "INFO": 2,
-                    "WARN": 3,
-                    "ERROR": 4,
-                    "SILENT": 5
-                }
-            },
-            "devices": {},
-            "discoveryTimer": null,
-            "discoveryPacketSequence": 0
-        },
         "host": "12.11.0.100",
-        "port": 9999,
-        "lastState": {
-            "powerOn": null,
-            "inUse": null
-        },
-        "_sysInfo": {
-            "sw_ver": "1.8.6 Build 180809 Rel.091659",
-            "hw_ver": "1.0",
-            "model": "LB130(EU)",
-            "description": "Smart Wi-Fi LED Bulb with Color Changing",
-            "alias": "Living room light",
-            "mic_type": "IOT.SMARTBULB",
-            "dev_state": "normal",
-            "mic_mac": "AC84C68641ED",
-            "deviceId": "8012DE62E60B20FCA53FF9767E0B46691A225F67",
-            "oemId": "D5C424D3C480911C980ECDD56C27988F",
-            "hwId": "111E35908497A05512E259BB76801E10",
-            "is_factory": false,
-            "disco_ver": "1.0",
-            "ctrl_protocols": {
-                "name": "Linkie",
-                "version": "1.0"
-            },
-            "light_state": {
-                "on_off": 0,
-                "dft_on_state": {
-                    "mode": "normal",
-                    "hue": 0,
-                    "saturation": 0,
-                    "color_temp": 4000,
-                    "brightness": 100
-                }
-            },
-            "is_dimmable": 1,
-            "is_color": 1,
-            "is_variable_color_temp": 1,
-            "preferred_state": [
-                {
-                    "index": 0,
-                    "hue": 0,
-                    "saturation": 0,
-                    "color_temp": 2700,
-                    "brightness": 50
-                },
-                {
-                    "index": 1,
-                    "hue": 0,
-                    "saturation": 75,
-                    "color_temp": 0,
-                    "brightness": 100
-                },
-                {
-                    "index": 2,
-                    "hue": 120,
-                    "saturation": 75,
-                    "color_temp": 0,
-                    "brightness": 100
-                },
-                {
-                    "index": 3,
-                    "hue": 240,
-                    "saturation": 75,
-                    "color_temp": 0,
-                    "brightness": 100
-                }
-            ],
-            "rssi": -42,
-            "active_mode": "none",
-            "heapsize": 291404,
-            "err_code": 0
-        },
-        "netif": {
-            "apiModuleName": "netif"
-        },
-        "supportsEmeter": true,
-        "apiModuleNamespace": {
-            "system": "smartlife.iot.common.system",
-            "cloud": "smartlife.iot.common.cloud",
-            "schedule": "smartlife.iot.common.schedule",
-            "timesetting": "smartlife.iot.common.timesetting",
-            "emeter": "smartlife.iot.common.emeter",
-            "netif": "netif",
-            "lightingservice": "smartlife.iot.smartbulb.lightingservice"
-        },
-        "cloud": {
-            "apiModuleName": "smartlife.iot.common.cloud"
-        },
-        "emeter": {
-            "apiModuleName": "smartlife.iot.common.emeter",
-            "childId": null,
-            "_realtime": {}
-        },
-        "lighting": {
-            "apiModuleName": "smartlife.iot.smartbulb.lightingservice",
-            "_lastState": {
-                "powerOn": false
+        "model": "LB130(EU)",
+        "description": "Smart Wi-Fi LED Bulb with Color Changing",
+        "alias": "Living room light",
+        "type": "bulb",
+        "state": {
+            "power": "on",
+            "on_state": {
+                "mode": "normal",
+                "hue": 0,
+                "saturation": 0,
+                "color_temp": 4000,
+                "brightness": 100
             }
-        },
-        "schedule": {
-            "apiModuleName": "smartlife.iot.common.schedule",
-            "childId": null
-        },
-        "time": {
-            "apiModuleName": "smartlife.iot.common.timesetting"
         }
     }
 }
@@ -233,8 +119,8 @@ Set the brightness of a bulb using the host address
 Request body:
 ```json
 {
-  "host": "12.11.0.100",
-  "brightness": "20"
+    "host": "12.11.0.100",
+    "brightness": "20"
 }
 ```
 
@@ -254,8 +140,8 @@ Set the color of a bulb by hex value using the host address
 Request body:
 ```json
 {
-  "host": "12.11.0.100",
-  "color": "2BFF24"
+    "host": "12.11.0.100",
+    "color": "2BFF24"
 }
 ```
 
@@ -275,8 +161,8 @@ Set the color temperature of a bulb using the host address
 Request body:
 ```json
 {
-  "host": "12.11.0.100",
-  "temperature": "4000"
+    "host": "12.11.0.100",
+    "temperature": "4000"
 }
 ```
 

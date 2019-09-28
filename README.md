@@ -119,8 +119,8 @@ Set the brightness of a bulb using the host address
 Request body:
 ```json
 {
-  "host": "12.11.0.100",
-  "brightness": "20"
+    "host": "12.11.0.100",
+    "brightness": "20"
 }
 ```
 
@@ -140,8 +140,8 @@ Set the color of a bulb by hex value using the host address
 Request body:
 ```json
 {
-  "host": "12.11.0.100",
-  "color": "2BFF24"
+    "host": "12.11.0.100",
+    "color": "2BFF24"
 }
 ```
 
@@ -161,8 +161,8 @@ Set the color temperature of a bulb using the host address
 Request body:
 ```json
 {
-  "host": "12.11.0.100",
-  "temperature": "4000"
+    "host": "12.11.0.100",
+    "temperature": "4000"
 }
 ```
 

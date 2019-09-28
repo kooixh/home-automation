@@ -24,12 +24,20 @@ module.exports = function(){
  * @returns {Promise<Error>}
  */
 async function getDeviceByIP(host) {
-    try {
-        let bulb = await client.getDevice({host: host});
-        return bulb;
-    } catch (e) {
-        return null;
-    }
+
+    return new Promise(async (resolve, reject) => {
+        try {
+            let bulb = await client.getDevice({host: host});
+            if (await client.getTypeFromSysInfo(bulb._sysInfo === 'bulb'))
+                resolve(bulb);
+
+            reject(new Error('Device is not a bulb'));
+        } catch (e) {
+            reject(new Error('Device is not found'));
+        }
+
+    });
+
 }
 
 /**

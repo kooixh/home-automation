@@ -1,10 +1,13 @@
 let client = require('../../main/client');
+let _ = require('lodash');
+
 
 
 module.exports = function () {
     return {
         getDevice:getDevice,
-        getAllDevices:getAllDevices
+        getAllDevices:getAllDevices,
+        extractDeviceInfo:extractDeviceInfo
     }
 }();
 
@@ -37,6 +40,32 @@ function discoverDevices() {
             resolve(devices);
         }, 500);
     });
+}
+
+/**
+ *
+ *
+ *
+ * @param device
+ */
+async function extractDeviceInfo(device) {
+    let deviceSim = {};
+    deviceSim.host = device.host;
+    deviceSim.model = device._sysInfo.model;
+    deviceSim.description = device._sysInfo.description;
+    deviceSim.alias = device._sysInfo.alias;
+
+
+    let type = await client.getTypeFromSysInfo(device._sysInfo);
+    deviceSim.type = type;
+
+    let lightState = device._sysInfo.light_state;
+    let powerState = (lightState.on_off === 0) ? 'off' : 'on';
+
+    deviceSim.state = {power: powerState, on_state: _.omit(lightState, 'on_off')};
+
+    return deviceSim;
+
 }
 
 /**

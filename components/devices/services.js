@@ -59,10 +59,19 @@ async function extractDeviceInfo(device) {
     let type = await client.getTypeFromSysInfo(device._sysInfo);
     deviceSim.type = type;
 
-    let lightState = device._sysInfo.light_state;
-    let powerState = (lightState.on_off === 0) ? 'off' : 'on';
+    if (type === 'bulb') {
+        let lightState = device._sysInfo.light_state;
+        let powerState = (lightState.on_off === 0) ? 'off' : 'on';
 
-    deviceSim.state = {power: powerState, on_state: _.omit(lightState, 'on_off')};
+        deviceSim.state = {power: powerState, lightingState: _.omit(lightState, 'on_off')};
+    } else {
+        let powerState = (device.lastState.inUse) ? 'on' : 'off';
+
+        let onTime = device._sysInfo.on_time;
+        deviceSim.state = {power: powerState, powerState: {onDuration: onTime}};
+    }
+
+
 
     return deviceSim;
 

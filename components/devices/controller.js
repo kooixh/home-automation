@@ -41,7 +41,7 @@ async function getDeviceByHost(req,res,next) {
 
     try{
         let dev = await devSrv.getDevice(req.params.host);
-        dev = await devSrv.extractDeviceInfo(dev)
+        dev = await devSrv.extractDeviceInfo(dev);
         if(_.isEmpty(dev))
             return res.status(200).json({status: 'error', message: 'No device found for host', data: {dev}});
 

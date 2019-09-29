@@ -56,7 +56,7 @@ Response body:
         "type": "bulb",
         "state": {
             "power": "on",
-            "on_state": {
+            "lightingState": {
                 "mode": "normal",
                 "hue": 0,
                 "saturation": 0,

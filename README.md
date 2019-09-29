@@ -174,3 +174,46 @@ Response body:
 	"status": "success"
 }
 ```
+
+
+### Plugs
+
+
+**POST /plug/ip/turnOn**
+
+Turn on bulb using the host address
+
+Request body:
+```json
+{
+	"host": "12.11.0.111"
+}
+```
+
+
+Response body:
+```json
+{
+	"message": "Computer switched on",
+	"status": "success"
+}
+```
+
+**POST /plug/ip/turnOff**
+
+Turn off bulb using the host address
+
+Request body:
+```json
+{
+	"host": "12.11.0.111"
+}
+```
+
+
+Response body:
+```json
+{
+	"message": "Computer switched off",
+	"status": "success"
+}

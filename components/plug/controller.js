@@ -4,16 +4,12 @@
  * Created by Xiu Hong 21/9/2019
  *
  */
-let plugSrv = require('./service');
+const plugSrv = require('./service');
 
-module.exports = function () {
-
-    return {
-        turnPlugOnByIP: turnPlugOnByIP,
-        turnPlugOffByIP: turnPlugOffByIP,
-    }
-}();
-
+module.exports = {
+    turnPlugOnByIP: turnPlugOnByIP,
+    turnPlugOffByIP: turnPlugOffByIP,
+};
 
 /**
  *

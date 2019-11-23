@@ -1,7 +1,7 @@
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-let devCtrl = require('./controller');
+const devCtrl = require('./controller');
 
 router.get('/list', devCtrl.listAllDevices);
 router.get('/ip/:host', devCtrl.getDeviceByHost);

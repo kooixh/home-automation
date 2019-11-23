@@ -1,9 +1,9 @@
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-let bulbRoute = require('../components/bulb/route');
-let devRoute = require('../components/devices/routes');
-let plugRoute = require('../components/plug/routes');
+const bulbRoute = require('../components/bulb/route');
+const devRoute = require('../components/devices/routes');
+const plugRoute = require('../components/plug/routes');
 
 
 

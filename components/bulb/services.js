@@ -1,18 +1,4 @@
-let client = require('../../main/client');
-
-
-module.exports = function(){
-
-    return {
-        getDeviceByIP: getDeviceByIP,
-        turnBulbOn:turnBulbOn,
-        turnBulbOff: turnBulbOff,
-        setBulbBrightness: setBulbBrightness,
-        setBulbColour: setBulbColour,
-        setBulbTemperature: setBulbTemperature
-    }
-
-}();
+const client = require('../../main/client');
 
 
 /**
@@ -112,3 +98,14 @@ async function setBulbTemperature(bulb, temperature) {
     await bulb.lighting.setLightState({color_temp:temperature});
     return {'message': bulb.alias+' colour temperature set to '+ temperature, status: 'success'};
 }
+
+
+module.exports = {
+    getDeviceByIP: getDeviceByIP,
+    turnBulbOn:turnBulbOn,
+    turnBulbOff: turnBulbOff,
+    setBulbBrightness: setBulbBrightness,
+    setBulbColour: setBulbColour,
+    setBulbTemperature: setBulbTemperature
+
+};

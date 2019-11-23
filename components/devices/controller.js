@@ -1,12 +1,6 @@
-let devSrv = require('./services');
-let _ = require('lodash');
+const devSrv = require('./services');
+const _ = require('lodash');
 
-module.exports = function () {
-    return {
-        listAllDevices:listAllDevices,
-        getDeviceByHost: getDeviceByHost
-    }
-}();
 
 
 /**
@@ -49,5 +43,10 @@ async function getDeviceByHost(req,res,next) {
     }catch (e) {
         next(e);
     }
-
 }
+
+module.exports = {
+    listAllDevices:listAllDevices,
+    getDeviceByHost: getDeviceByHost
+
+};

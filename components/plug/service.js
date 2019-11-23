@@ -1,15 +1,7 @@
-let client = require('../../main/client');
+const client = require('../../main/client');
 
 
-module.exports = function(){
 
-    return {
-        getDeviceByIP: getDeviceByIP,
-        turnPlugOn:turnPlugOn,
-        turnPlugOff: turnPlugOff,
-    }
-
-}();
 
 
 /**
@@ -61,3 +53,9 @@ async function turnPlugOff(plug) {
     await plug.setPowerState(false);
     return {'message': plug.alias+' switched off', status: 'success'};
 }
+
+module.exports = {
+    getDeviceByIP: getDeviceByIP,
+    turnPlugOn:turnPlugOn,
+    turnPlugOff: turnPlugOff,
+};

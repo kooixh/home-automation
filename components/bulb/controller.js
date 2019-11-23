@@ -4,20 +4,11 @@
  * Created by Xiu Hong 21/9/2019
  *
  */
-let colourUtils = require('../../utils/colour.utils');
-let colourConvert = require('color-convert');
-let bulbSrv = require('./services');
+const colourUtils = require('../../utils/colour.utils');
+const colourConvert = require('color-convert');
+const bulbSrv = require('./services');
 
-module.exports = function () {
 
-    return {
-        turnBulbOnByIP: turnBulbOnByIP,
-        turnBulbOffByIP: turnBulbOffByIP,
-        setBulbBrightness: setBulbBrightness,
-        setBulbColour: setBulbColour,
-        setColourTemperature: setColourTemperature
-    }
-}();
 
 
 /**
@@ -171,6 +162,13 @@ async function setColourTemperature(req, res, next) {
     } catch (e) {
         next(e);
     }
-
-
 }
+
+module.exports = {
+    turnBulbOnByIP: turnBulbOnByIP,
+    turnBulbOffByIP: turnBulbOffByIP,
+    setBulbBrightness: setBulbBrightness,
+    setBulbColour: setBulbColour,
+    setColourTemperature: setColourTemperature
+};
+

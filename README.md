@@ -20,6 +20,13 @@ Bulb - LB100, LB110, LB120, LB130, LB200, LB230
 [tplink-smarthome-api](https://github.com/plasticrake/tplink-smarthome-api)
 
 
+
+## Starting the app
+
+    $ npm install 
+    $ npm start
+
+
 ## Endpoints
 
 ### Devices

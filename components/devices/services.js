@@ -1,15 +1,8 @@
-let client = require('../../main/client');
-let _ = require('lodash');
+const client = require('../../main/client');
+const _ = require('lodash');
 
 
 
-module.exports = function () {
-    return {
-        getDevice:getDevice,
-        getAllDevices:getAllDevices,
-        extractDeviceInfo:extractDeviceInfo
-    }
-}();
 
 
 /**
@@ -108,3 +101,10 @@ async function getDevice(host) {
     }
 
 }
+
+
+module.exports = {
+    getDevice:getDevice,
+    getAllDevices:getAllDevices,
+    extractDeviceInfo:extractDeviceInfo
+};

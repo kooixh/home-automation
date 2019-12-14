@@ -26,11 +26,11 @@ function discoverDevices() {
     return new Promise(function(resolve, reject) {
         let devices = [];
         //search for 500ms
-        client.startDiscovery({discoveryTimeout:500}).on('device-new', (device) => {
-            devices.push({name: device.alias, host: device.host});
+        client.startDiscovery({discoveryTimeout:500}).on('device-new', async (device) => {
+            devices.push(await extractDeviceInfo(device));
         });
         setTimeout(()=>{
-            resolve(devices);
+            return resolve(devices);
         }, 500);
     });
 }

@@ -1,8 +1,10 @@
 const client = require('../../main/client');
 const _ = require('lodash');
+const config = require('config');
+
 
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/mydb";
+var url = config.mongoDB.url;
 
 
 /**

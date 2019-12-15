@@ -14,11 +14,15 @@ Bulb - LB100, LB110, LB120, LB130, LB200, LB230
 * [NodeJS](https://nodejs.org/en/)
 * [npm](https://www.npmjs.com/)
 * [ExpressJS](https://expressjs.com/)
+* [MongoDB](https://www.mongodb.com/)
+
 
 ## Dependency
 
 [tplink-smarthome-api](https://github.com/plasticrake/tplink-smarthome-api)
 
+
+Requires a MongoDB instance running on localhost:27017 or change the url at `/config/default.js`
 
 
 ## Starting the app
@@ -39,8 +43,10 @@ Response body:
 {
     "devices": [
         {
-            "name": "Living room light",
-            "host": "12.11.0.100"
+            "_id": "5df5ab687d3532e777ddb8db",
+            "deviceId": "1234ZE34E60ABDAJH882364767E0B46691A225F67",
+            "host": "192.168.0.100",
+            "type": "bulb"
         }
     ]
 }

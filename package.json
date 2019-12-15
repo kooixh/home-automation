@@ -19,6 +19,8 @@
   "dependencies": {
     "color-convert": "^2.0.1",
     "color-temperature": "^0.2.7",
+    "cors": "^2.8.5",
+    "mongodb": "^3.4.0",
     "uglify-js": "^3.6.0"
   }
 }

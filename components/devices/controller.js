@@ -12,9 +12,9 @@ const _ = require('lodash');
  * @param send
  * @returns {Promise<void>}
  */
-async function listAllDevices(req, res, send) {
+async function listAllDevices(req, res) {
     let response = await devSrv.getAllDevices();
-    res.status(200).json(response);
+    return res.status(200).json(response);
 };
 
 

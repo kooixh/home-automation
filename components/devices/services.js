@@ -1,8 +1,8 @@
 const client = require('../../main/client');
 const _ = require('lodash');
 
-
-
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/mydb";
 
 
 /**
@@ -22,17 +22,63 @@ async function getAllDevices() {
  *
  * @returns {Promise<unknown>}
  */
-function discoverDevices() {
-    return new Promise(function(resolve, reject) {
+async function discoverDevices() {
+    return new Promise(async function(resolve, reject) {
         let devices = [];
         //search for 500ms
-        client.startDiscovery({discoveryTimeout:500}).on('device-new', async (device) => {
-            devices.push(await extractDeviceInfo(device));
+        client.startDiscovery({discoveryTimeout:500}).on('device-new', (device) => {
+            devices.push(device);
         });
-        setTimeout(()=>{
-            return resolve(devices);
+        setTimeout(async ()=>{
+            let devicesInfo = await saveInDatabase(devices);
+            console.log(devicesInfo);
+            return resolve(devicesInfo);
         }, 500);
+
+
     });
+}
+
+/**
+ *
+ *
+ *
+ * @returns {Promise<void>}
+ */
+async function saveInDatabase(deviceList) {
+
+    return new Promise((async (resolve, reject) => {
+
+        let devicesInfo = await Promise.all(_.map(deviceList, async (elem) => {
+            let type = await client.getTypeFromSysInfo(elem._sysInfo);
+            return {
+                host: elem.host,
+                deviceId: elem._sysInfo.deviceId,
+                type: type
+            }
+        }));
+
+        MongoClient.connect(url, function(err, client) {
+            if (err) throw err;
+            const db = client.db('home-automation');
+            const col = db.collection('devices');
+
+            //override any new discovered device
+            _.forEach(devicesInfo, (elem) => {
+                col.findOneAndUpdate({deviceId: elem.deviceId},{"$set": elem}, { upsert: true }, (err, r) => {
+                    if (err) return reject(err);
+                    console.info(r);
+                });
+            });
+            // retrieve all devices
+            col.find().toArray((err, reply) => {
+                client.close();
+                return resolve(reply);
+            });
+        });
+
+    }))
+
 }
 
 /**
@@ -47,7 +93,7 @@ async function extractDeviceInfo(device) {
     deviceSim.model = device._sysInfo.model;
     deviceSim.description = device._sysInfo.description;
     deviceSim.alias = device._sysInfo.alias;
-
+    deviceSim.id = device._sysInfo.deviceId;
 
     let type = await client.getTypeFromSysInfo(device._sysInfo);
     deviceSim.type = type;

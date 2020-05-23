@@ -1,4 +1,4 @@
-const client = require('../../main/client');
+const client = require('../../server/client');
 
 
 /**

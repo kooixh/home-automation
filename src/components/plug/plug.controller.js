@@ -1,24 +1,5 @@
-/**
- *
- *
- * Created by Xiu Hong 21/9/2019
- *
- */
-const plugSrv = require('./service');
+const plugSrv = require('./plug.service');
 
-module.exports = {
-    turnPlugOnByIP: turnPlugOnByIP,
-    turnPlugOffByIP: turnPlugOffByIP,
-};
-
-/**
- *
- * Turn a bulb on using ip
- *
- * @param req
- * @param res
- * @param next
- */
 async function turnPlugOnByIP(req, res, next) {
 
     if(!req.body || !req.body.hasOwnProperty('host'))
@@ -36,14 +17,6 @@ async function turnPlugOnByIP(req, res, next) {
     }
 }
 
-/**
- *
- *
- * @param req
- * @param res
- * @param next
- * @returns {Promise<*>}
- */
 async function turnPlugOffByIP(req, res, next) {
     if(!req.body || !req.body.hasOwnProperty('host'))
         return next(new Error('Body does not has host field.'));
@@ -61,3 +34,8 @@ async function turnPlugOffByIP(req, res, next) {
         next(e);
     }
 }
+
+module.exports = {
+    turnPlugOnByIP: turnPlugOnByIP,
+    turnPlugOffByIP: turnPlugOffByIP,
+};

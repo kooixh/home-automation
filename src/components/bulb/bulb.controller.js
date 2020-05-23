@@ -6,7 +6,7 @@
  */
 const colourUtils = require('../../utils/colour.utils');
 const colourConvert = require('color-convert');
-const bulbSrv = require('./services');
+const bulbSrv = require('./bulb.services');
 
 
 

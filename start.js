@@ -1,6 +1,6 @@
 const config = require('config');
 
-const app = require('./main/app');
+const app = require('./src/server/app');
 const port = config.port;
 
 app.listen(port);

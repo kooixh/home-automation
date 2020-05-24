@@ -1,14 +1,6 @@
 const client = require('../../server/client');
 
 
-/**
- *
- *
- * get the bulb using the host address
- *
- * @param host
- * @returns {Promise<Error>}
- */
 async function getDeviceByIP(host) {
 
     return new Promise(async (resolve, reject) => {
@@ -26,52 +18,21 @@ async function getDeviceByIP(host) {
 
 }
 
-/**
- *
- *
- *
- * @param bulb
- * @returns {Promise<{message: string, status: string}>}
- */
 async function turnBulbOn(bulb) {
     await bulb.setPowerState(true);
     return {'message': bulb.alias+' switched on', status: 'success'};
 }
 
-/**
- *
- *
- *
- * @param bulb
- * @returns {Promise<{message: string, status: string}>}
- */
 async function turnBulbOff(bulb) {
     await bulb.setPowerState(false);
     return {'message': bulb.alias+' switched off', status: 'success'};
 }
 
-/**
- *
- *
- *
- * @param bulb
- * @param brightness
- * @returns {Promise<void>}
- */
 async function setBulbBrightness(bulb, brightness) {
     await bulb.lighting.setLightState({brightness: brightness});
     return {'message': bulb.alias+' brightness set to '+brightness, status: 'success'};
 }
 
-
-/**
- *
- *
- *
- * @param bulb
- * @param brightness
- * @returns {Promise<void>}
- */
 async function setBulbColour(bulb, hsv) {
 
     let hue = hsv[0];
@@ -84,15 +45,6 @@ async function setBulbColour(bulb, hsv) {
     return {'message': bulb.alias+' colour set to HSV '+hue+' '+saturation+' '+value, status: 'success'};
 }
 
-
-/**
- *
- *
- *
- * @param bulb
- * @param brightness
- * @returns {Promise<void>}
- */
 async function setBulbTemperature(bulb, temperature) {
 
     await bulb.lighting.setLightState({color_temp:temperature});
@@ -107,5 +59,4 @@ module.exports = {
     setBulbBrightness: setBulbBrightness,
     setBulbColour: setBulbColour,
     setBulbTemperature: setBulbTemperature
-
 };

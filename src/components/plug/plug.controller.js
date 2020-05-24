@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const plugSrv = require('./plug.service');
 
 async function turnPlugOnByIP(req, res, next) {
@@ -24,10 +25,8 @@ async function turnPlugOffByIP(req, res, next) {
     let hostAddress = req.body.host;
     try{
         let plug = await plugSrv.getDeviceByIP(hostAddress);
-
-        if (plug === null)
+        if (_.isEmpty(plug))
             return res.status(404).json({status: 'error', message:'Device not found for host', data: {}});
-
         let response = await plugSrv.turnPlugOff(plug);
         return res.status(200).json(response);
     }catch (e) {

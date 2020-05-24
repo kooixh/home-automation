@@ -1,21 +1,17 @@
 const client = require('../../server/client');
 
-
 async function getDeviceByIP(host) {
-
     return new Promise(async (resolve, reject) => {
         try {
             let plug = await client.getDevice({host: host});
-            if (await client.getTypeFromSysInfo(plug._sysInfo === 'plug'))
-                resolve(plug);
-            reject(new Error('Device is not a plug'));
+            return (await client.getTypeFromSysInfo(plug._sysInfo === 'plug')) ? resolve(plug) :
+                reject(new Error('Device is not a plug'));
         } catch (e) {
             console.log(e);
             reject(new Error('Device is not found'));
         }
 
     });
-
 }
 
 async function turnPlugOn(plug) {

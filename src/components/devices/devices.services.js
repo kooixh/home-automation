@@ -1,10 +1,10 @@
 const client = require('../../server/client');
 const _ = require('lodash');
 
-let { MongoClient, mongoUrl } = require('../../server/mongo');
-
 const ON_POWER_STATE = 'on';
 const OFF_POWER_STATE = 'off';
+
+let { MongoClient, mongoUrl } = require('../../server/mongo');
 
 async function getAllDevices() {
     let devices = await discoverDevices();
@@ -89,17 +89,14 @@ async function extractDeviceInfo(device) {
         deviceSim.state = {power: powerState, powerState: {onDuration: onTime}};
     }
 
-
     return deviceSim;
 
 }
 
 async function getDevice(host) {
-
     try {
         let device = await client.getDevice({host: host});
         let cache = [];
-
         // Dealing with circular object in json
         device = JSON.parse(JSON.stringify(device, function (key, value) {
             if (typeof value === 'object' && value !== null) {
@@ -114,7 +111,6 @@ async function getDevice(host) {
     } catch (e) {
         return {};
     }
-
 }
 
 module.exports = {

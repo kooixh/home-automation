@@ -25,5 +25,4 @@ async function getDeviceByHost(req,res,next) {
 module.exports = {
     listAllDevices:listAllDevices,
     getDeviceByHost: getDeviceByHost
-
 };

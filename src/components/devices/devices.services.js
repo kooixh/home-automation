@@ -3,8 +3,9 @@ const _ = require('lodash');
 
 const ON_POWER_STATE = 'on';
 const OFF_POWER_STATE = 'off';
+const DISCOVER_TIMEOUT = 500;
 
-let { MongoClient, mongoUrl } = require('../../server/mongo');
+let { mongoConnect } = require('../../server/mongo');
 
 async function getAllDevices() {
     let devices = await discoverDevices();
@@ -15,21 +16,19 @@ async function discoverDevices() {
     return new Promise(async resolve => {
         let devices = [];
         //search for 500ms
-        client.startDiscovery({discoveryTimeout: 500}).on('device-new', (device) => {
+        client.startDiscovery({discoveryTimeout: DISCOVER_TIMEOUT}).on('device-new', (device) => {
             devices.push(device);
         });
         setTimeout(async () => {
             let devicesInfo = await saveInDatabase(devices);
             return resolve(devicesInfo);
-        }, 500);
+        }, DISCOVER_TIMEOUT);
 
     });
 }
 
 async function saveInDatabase(deviceList) {
-
     return new Promise((async (resolve, reject) => {
-
         let devicesInfo = await Promise.all(_.map(deviceList, async (elem) => {
             let type = await client.getTypeFromSysInfo(elem._sysInfo);
             return {
@@ -38,24 +37,19 @@ async function saveInDatabase(deviceList) {
                 type: type
             }
         }));
-
-        MongoClient.connect(mongoUrl, (err, client) => {
+        mongoConnect((err, client) => {
             if (err) return reject(err);
             const db = client.db('home-automation');
             const col = db.collection('devices');
-
-            //override any new discovered device
             _.forEach(devicesInfo, (elem) => {
-                updateDevice(col, elem);
+                updateDevice(col, elem); //override any new discovered device
             });
-            // retrieve all devices
             col.find().toArray((err, reply) => {
                 client.close();
                 return resolve(reply);
             });
         });
     }));
-
 }
 
 function updateDevice(collection, elem) {
@@ -67,30 +61,25 @@ function updateDevice(collection, elem) {
 }
 
 async function extractDeviceInfo(device) {
-    let deviceSim = {};
-    deviceSim.host = device.host;
-    deviceSim.model = device._sysInfo.model;
-    deviceSim.description = device._sysInfo.description;
-    deviceSim.alias = device._sysInfo.alias;
-    deviceSim.id = device._sysInfo.deviceId;
-
+    let deviceSim = {
+        host: device.host,
+        model: device._sysInfo.model,
+        description: device._sysInfo.description,
+        alias: device._sysInfo.alias,
+        id: device._sysInfo.deviceId
+    };
     let type = await client.getTypeFromSysInfo(device._sysInfo);
     deviceSim.type = type;
-
     if (type === 'bulb') {
         let lightState = device._sysInfo.light_state;
         let powerState = (lightState.on_off === 0) ? OFF_POWER_STATE : ON_POWER_STATE;
-
         deviceSim.state = {power: powerState, lightingState: _.omit(lightState, 'on_off')};
     } else {
         let powerState = (device.lastState.inUse) ? ON_POWER_STATE : OFF_POWER_STATE;
-
         let onTime = device._sysInfo.on_time;
         deviceSim.state = {power: powerState, powerState: {onDuration: onTime}};
     }
-
     return deviceSim;
-
 }
 
 async function getDevice(host) {

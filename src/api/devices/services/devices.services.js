@@ -1,11 +1,11 @@
-const client = require('../../server/client');
+const client = require('../../../server/client');
 const _ = require('lodash');
 
 const ON_POWER_STATE = 'on';
 const OFF_POWER_STATE = 'off';
 const DISCOVER_TIMEOUT = 500;
 
-let { mongoConnect } = require('../../server/mongo');
+let { mongoConnect } = require('../../../server/mongo');
 
 async function getAllDevices() {
     let devices = await discoverDevices();

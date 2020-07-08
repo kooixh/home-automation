@@ -1,6 +1,6 @@
-const colourUtils = require('../../utils/colour.utils');
+const colourUtils = require('../../../common/utils/colour.utils');
 const colourConvert = require('color-convert');
-const bulbSrv = require('./bulb.services');
+const bulbSrv = require('../services/bulb.services');
 
 
 async function turnBulbOnByIP(req, res, next) {

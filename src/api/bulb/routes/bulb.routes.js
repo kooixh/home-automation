@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const bulbCtrl = require('./bulb.controller');
+const bulbCtrl = require('../controllers/bulb.controller');
 
 router.post('/ip/turnOn', bulbCtrl.turnBulbOnByIP);
 router.post('/ip/turnOff', bulbCtrl.turnBulbOffByIP);

@@ -1,4 +1,4 @@
-const client = require('../../server/client');
+const client = require('../../../server/client');
 
 async function getDeviceByIP(host) {
     return new Promise(async (resolve, reject) => {

@@ -1,4 +1,4 @@
-const devSrv = require('./devices.services');
+const devSrv = require('../services/devices.services');
 const _ = require('lodash');
 
 async function listAllDevices(req, res) {

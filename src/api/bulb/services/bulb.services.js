@@ -1,4 +1,4 @@
-const client = require('../../server/client');
+const client = require('../../../server/client');
 
 const WHITE_COLOUR_TEMP = 4000;
 

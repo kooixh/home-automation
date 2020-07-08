@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const plugSrv = require('./plug.service');
+const plugSrv = require('../services/plug.service');
 
 async function turnPlugOnByIP(req, res, next) {
 

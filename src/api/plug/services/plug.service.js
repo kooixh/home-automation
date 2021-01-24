@@ -31,6 +31,6 @@ async function turnPlugOff(plug) {
 
 module.exports = {
     getDeviceByIP: getDeviceByIP,
-    turnPlugOn:turnPlugOn,
+    turnPlugOn: turnPlugOn,
     turnPlugOff: turnPlugOff,
 };

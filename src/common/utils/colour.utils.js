@@ -4,5 +4,5 @@ function isHEXColour(hex) {
 }
 
 module.exports = {
-    isHEXColour:isHEXColour
+    isHEXColour: isHEXColour
 };

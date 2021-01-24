@@ -5,7 +5,7 @@ const ON_POWER_STATE = 'on';
 const OFF_POWER_STATE = 'off';
 const DISCOVER_TIMEOUT = 500;
 
-let { mongoConnect } = require('../../../server/mongo');
+let {mongoConnect} = require('../../../server/mongo');
 
 async function getAllDevices() {
     let devices = await discoverDevices();
@@ -35,7 +35,7 @@ async function saveInDatabase(deviceList) {
                 host: elem.host,
                 deviceId: elem._sysInfo.deviceId,
                 type: type
-            }
+            };
         }));
         mongoConnect((err, client) => {
             if (err) return reject(err);

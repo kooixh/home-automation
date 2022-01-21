@@ -1,4 +1,4 @@
-  
+
 version: 2.1
 orbs:
   node: circleci/node@1.1.6
@@ -10,9 +10,10 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: npm install
+            - run: npm ci
+            - run: npm run prettier:check
+            - run: npm run eslint:lint
             - run: npm test
-            - run: npm i eslint && node_modules/eslint/bin/eslint.js .
 workflows:
   build-and-test:
     jobs:

@@ -71,15 +71,6 @@ async function setBulbBrightness(req, res, next) {
   }
 }
 
-/**
- *
- * Set the brightness of a bulb
- *
- * @param req
- * @param res
- * @param next
- * @returns {Promise<*>}
- */
 async function setBulbColour(req, res, next) {
   if (!req.body || !req.body.hasOwnProperty('host')) {
     return next(new Error('Body does not have host field.'))

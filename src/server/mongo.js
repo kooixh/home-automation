@@ -1,12 +1,12 @@
-const config = require('config');
+const config = require('config')
 
-let MongoClient = require('mongodb').MongoClient;
-let url = config.mongoDB.url;
+let MongoClient = require('mongodb').MongoClient
+let url = config.mongoDB.url
 
 function connect(callback) {
-    MongoClient.connect(url, callback);
+  MongoClient.connect(url, callback)
 }
 
 module.exports = {
-    mongoConnect: connect
-};
+  mongoConnect: connect,
+}

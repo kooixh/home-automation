@@ -1,9 +1,10 @@
 {
   "arrowParens": "always",
-  "endOfLine": "lf",
+  "bracketSpacing": true,
   "printWidth": 120,
-  "semi": true,
+  "quoteProps": "as-needed",
+  "semi": false,
   "singleQuote": true,
-  "trailingComma": "none",
-  "tabWidth": 4
+  "tabWidth": 2,
+  "trailingComma": "es5"
 }

@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node start.js",
-    "test": "mocha ./tests/ --recursive --exit"
+    "test": "mocha ./tests/ --recursive --exit",
+    "prettier:check": "npx prettier --check 'src/**/*.js'",
+    "prettier:write": "npx prettier --write 'src/**/*.js'",
+    "eslint:lint": "npx eslint 'src/**/*.js'",
+    "eslint:fix": "npx eslint --fix 'src/**/*.js'"
   },
   "author": "",
   "license": "ISC",

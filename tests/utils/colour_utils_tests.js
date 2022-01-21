@@ -3,7 +3,7 @@ global.mocha = require('mocha');
 
 let expect = require('chai').expect;
 
-let colourUtils = require('../../src/common/utils/colour.utils');
+let colourUtils = require('../../src/common/utils/colour-utils');
 
 describe('isHEXColour function', () => {
     describe('when given a valid HEX Code', () => {

@@ -1,12 +1,12 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 
-const bulbRoute = require('../api/bulb/routes/bulb.routes');
-const devRoute = require('../api/devices/routes/devices.routes');
-const plugRoute = require('../api/plug/routes/plug.routes');
+const bulbRoute = require('../api/bulb/routes')
+const devRoute = require('../api/devices/routes')
+const plugRoute = require('../api/plug/routes')
 
-router.use('/bulb', bulbRoute);
-router.use('/devices', devRoute);
-router.use('/plug', plugRoute);
+router.use('/bulb', bulbRoute)
+router.use('/devices', devRoute)
+router.use('/plug', plugRoute)
 
-module.exports = router;
+module.exports = router

@@ -1,4 +1,4 @@
-const {Client} = require('tplink-smarthome-api');
-const client = new Client();
+const { Client } = require('tplink-smarthome-api')
+const client = new Client()
 
-module.exports = client;
+module.exports = client

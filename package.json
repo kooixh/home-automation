@@ -21,7 +21,7 @@
     "chai": "^4.2.0",
     "color-convert": "^2.0.1",
     "color-temperature": "^0.2.7",
-    "config": "^3.2.4",
+    "config": "^3.3.8",
     "cors": "^2.8.5",
     "mocha": "^8.2.1",
     "mongodb": "^3.4.0",
